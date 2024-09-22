@@ -28,7 +28,7 @@ export const Main = () => {
             const parsedInput = JSON.parse(jsonInput);
 
             // Call your API endpoint
-            const response = await fetch('http://localhost:3000/api/bfhl', {
+            const response = await fetch('/api/bfhl', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
