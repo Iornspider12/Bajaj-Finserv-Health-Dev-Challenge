@@ -7,6 +7,7 @@ import { FancyMultiSelect } from "./multiselect";
 
 export const Main = () => {
     const [jsonInput, setJsonInput] = useState('');
+    // eslint-disable-next-line
     const [apiResponse, setApiResponse] = useState<Record<string,any>|null>(null);
     const [error, setError] = useState('');
     const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
@@ -15,6 +16,7 @@ export const Main = () => {
         { value: 'numbers', label: 'Numbers' },
         { value: 'highest_lowercase_alphabet', label: 'Highest lowercase alphabet' }
     ];
+    // eslint-disable-next-line
     // @ts-ignore
     const handleClick = async (e) => {
         e.preventDefault();
@@ -41,6 +43,7 @@ export const Main = () => {
             const data = await response.json();
             setApiResponse(data);
         } catch (err) {
+            // eslint-disable-next-line
             // @ts-ignore
             setError(err.message || 'An error occurred');
         }
@@ -50,6 +53,7 @@ export const Main = () => {
 
         const filteredData = {};
         selectedFilters.forEach(filter => {
+            // eslint-disable-next-line
             // @ts-ignore
             filteredData[filter] = apiResponse[filter];
         });
