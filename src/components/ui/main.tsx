@@ -2,26 +2,20 @@
 import { useState } from "react";
 import { Input } from "./input"
 import { Label } from "./label"
-import {
-    Select,
-    SelectContent,
-    SelectGroup,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select"
 import { Button } from "./button";
+import { FancyMultiSelect } from "./multiselect";
 
 export const Main = () => {
     const [jsonInput, setJsonInput] = useState('');
-    const [apiResponse, setApiResponse] = useState(null);
+    const [apiResponse, setApiResponse] = useState<Record<string,any>|null>(null);
     const [error, setError] = useState('');
-    const [selectedFilters, setSelectedFilters] = useState([]);
+    const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
     const filterOptions = [
         { value: 'alphabets', label: 'Alphabets' },
         { value: 'numbers', label: 'Numbers' },
         { value: 'highest_lowercase_alphabet', label: 'Highest lowercase alphabet' }
     ];
+    // @ts-ignore
     const handleClick = async (e) => {
         e.preventDefault();
         setError('');
@@ -47,6 +41,7 @@ export const Main = () => {
             const data = await response.json();
             setApiResponse(data);
         } catch (err) {
+            // @ts-ignore
             setError(err.message || 'An error occurred');
         }
     };
@@ -55,7 +50,8 @@ export const Main = () => {
 
         const filteredData = {};
         selectedFilters.forEach(filter => {
-            filteredData[filter.value] = apiResponse[filter.value];
+            // @ts-ignore
+            filteredData[filter] = apiResponse[filter];
         });
 
         return (
@@ -90,27 +86,17 @@ export const Main = () => {
             {apiResponse && (
                 <div className="mb-4">
                     <h3 className="text-lg font-semibold">Filter Results:</h3>
-                    <Select>
-                        <SelectTrigger className="w-[180px]">
-                            <SelectValue placeholder="Theme" />
-                        </SelectTrigger>
-                        <SelectContent>
-                            <SelectGroup>
-                                {filterOptions.map((option) => (
-                                    <SelectItem
-                                        key={option.label}
-                                        value={String(option.value)}
-                                    >
-                                        {option.label}
-                                    </SelectItem>
-                                ))}
-                            </SelectGroup>
-                        </SelectContent>
+                    <FancyMultiSelect
+                        onChange={(values) => {
+                            setSelectedFilters(values.map(({ value }) => value));
+                          }}
+                        data={filterOptions}
+                        name="filters"
+                    />
 
-                    </Select>
                 </div>
             )}
-        {renderFilteredResponse()}
+            {renderFilteredResponse()}
         </div>
     )
 }
