@@ -1,7 +1,7 @@
-Project Overview
+Project Overview:
 This project was developed as part of the Bajaj Finserv Health Dev Challenge. The aim was to build a web application focused on health-related services within a tight time constraint of 3 hours. The project showcases core development skills including Full Stack development, Frontend UI design, and Backend integration.
 
-Key Features
+Key Features:
 User-Friendly Interface: A clean and simple design for ease of navigation.
 Responsive Design: The website is optimized for various screen sizes.
 Health Services: Users can explore different health-related functionalities (mention key features).
@@ -36,19 +36,7 @@ Copy code
 npm start
 Open your browser and navigate to http://localhost:3000 to view the application.
 
-Project Structure
-plaintext
-Copy code
-├── public/
-│   ├── index.html
-│   └── styles.css
-├── src/
-│   ├── components/
-│   ├── services/
-│   └── App.js
-├── README.md
-├── package.json
-└── .gitignore
+
 Future Improvements
 Implement additional health-related features (e.g., appointment booking, health records).
 Integrate a backend service for dynamic data handling.
